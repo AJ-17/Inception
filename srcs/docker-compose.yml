@@ -1,9 +1,19 @@
+networks:
+  inception:
+    driver: bridge
+
 services:
   nginx:
+    container_name: nginx
+    networks:
+      - inception
     build:
       context: ./requirements/nginx
       dockerfile: Dockerfile
-
-
-volumes:
-  wordpress:
+    ports:
+      - "443:443"
+    volumes:
+      - type: bind
+        source: /home/ajakubcz/data/
+        target: /test/volume
+    restart: on-failure
