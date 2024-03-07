@@ -1,19 +1,48 @@
-networks:
-  inception:
-    driver: bridge
+# networks:
+#   inception:
+#     driver: bridge
+
+# services:
+#   nginx:
+#     container_name: nginx
+#     networks:
+#       - inception
+#     build:
+#       context: ./requirements/nginx
+#       dockerfile: Dockerfile
+#     ports:
+#       - "443:443"
+#     volumes:
+#       - type: bind
+#         source: /home/ajakubcz/data/
+#         target: /test/volume
+#     restart: on-failure
+
+
+version: '2'
 
 services:
-  nginx:
-    container_name: nginx
-    networks:
-      - inception
-    build:
-      context: ./requirements/nginx
-      dockerfile: Dockerfile
-    ports:
-      - "443:443"
-    volumes:
-      - type: bind
-        source: /home/ajakubcz/data/
-        target: /test/volume
-    restart: on-failure
+   db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+volumes:
+    db_data:
