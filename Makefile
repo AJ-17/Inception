@@ -4,7 +4,7 @@ all :	 		build
 				$(CPP) $(FLAGS) -c $< -o $@
 
 build:
-				cd srcs && docker compose up -d;
+				cd srcs && sudo docker compose up -d;
 
 rm:			
 				docker system prune -af;
