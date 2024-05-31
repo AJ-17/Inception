@@ -4,10 +4,12 @@ all :	 		build up
 
 
 build :
+				mkdir -p /home/ajakubcz/data/wordpress
+				mkdir -p /home/ajakubcz/data/mariadb
 				sudo docker compose -f $(DOCKER_COMPOSE_PATH) build
 
 up:
-				cd srcs && sudo docker compose up -d;
+				sudo docker compose -f $(DOCKER_COMPOSE_PATH) up -d;
 
 rm:			
 				sudo docker compose -f $(DOCKER_COMPOSE_PATH) down --volumes --rmi all
@@ -19,4 +21,4 @@ rmf:			rm
 
 re:				rm all
 
-.PHONY :		all rm rmf re
+.PHONY :		all build up rm rmf re

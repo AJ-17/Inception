@@ -10,10 +10,6 @@ server { # simple reverse-proxy
     server_name ajakubcz.42.fr;
     index index.php index.html;
 
-    # location / {
-    #     try_files $uri $uri/ =404;
-    # }
-
     location ~ \.php$ {								# Pour toutes les requetes php
         include snippets/fastcgi-php.conf;
         fastcgi_pass wordpress:9000;				# Comment renvoyer les requetes php sur le port 9000
