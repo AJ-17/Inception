@@ -3,6 +3,7 @@ FROM debian:bullseye
 RUN apt update -y
 RUN apt upgrade -y
 
+RUN apt install netcat -y
 RUN apt-get -y install wget
 RUN apt-get install -y php7.3\
                        php-fpm\
