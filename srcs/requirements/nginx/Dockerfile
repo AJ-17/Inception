@@ -4,7 +4,7 @@ RUN apt update
 RUN apt upgrade -y
 RUN apt install nginx -y
 
-COPY conf/test /etc/nginx/sites-enabled
+COPY conf/nginx.conf /etc/nginx/sites-enabled
 
 RUN mkdir -p /etc/nginx/ssl
 RUN apt install openssl -y
