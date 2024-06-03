@@ -9,7 +9,7 @@ if ! test -f wp-config.php; then
                         --dbuser=$SQL_USER \
                         --dbpass=$SQL_PASSWORD \
                         --dbhost=mariadb:3306 \
-                        --path='/var/www/wordpress'
+                        --path=$WP_PATH
 
     wp core install --url="${WP_URL}" \
                     --title="${WP_TITLE}" \
